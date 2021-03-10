@@ -5,7 +5,7 @@
 | Column             | Type   | Options                        |
 | ------------------ | ------ | ------------------------------ |
 | nickname           | string | null: false                    |
-| email_address      | string | null: false, foreign_key: true |
+| email              | string | unique: true                   |
 | encrypted_password | string | null: false                    |
 | last_name          | string | null: false                    |
 | first_name         | string | null: false                    |
@@ -24,18 +24,18 @@
 | ------------------ | ---------- | ------------------------------ |
 | product            | string     | null: false                    |
 | description        | text       | null: false                    |
-| category           | string     | null: false                    |
-| status             | string     | null: false                    |
-| delivery_fee       | string     | null: false                    |
-| shipping_area      | string     | null: false                    |
-| days_to_deliver    | string     | null: false                    |
-| price              | string     | null: false                    |
-| seller             | references | null: false, foreign_key: true |
+| category_id        | integer    | null: false                    |
+| status_id          | integer    | null: false                    |
+| delivery_fee_id    | integer    | null: false                    |
+| shipping_area_id   | integer    | null: false                    |
+| days_to_deliver_id | integer    | null: false                    |
+| price              | integer    | null: false                    |
+| user               | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :users
-- has_one :purchase_records
+- belongs_to :user
+- has_one :purchase_record
 
 ## purchase_records テーブル
 
@@ -46,8 +46,8 @@
 
 ### Association
 
-- belongs_to :users
-- belongs_to :products
+- belongs_to :user
+- belongs_to :product
 - has_one :shipping_address
 
 ## shipping_address テーブル
@@ -58,10 +58,10 @@
 | prefectures        | string     | null: false                    |
 | municipal_district | string     | null: false                    |
 | address            | string     | null: false                    |
-| building number    | string     | null: false                    |
+| building_number    | string     | null: false                    |
 | phone_number       | string     | null: false                    |
 | user               | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :purchase_records
+- belongs_to :purchase_record
